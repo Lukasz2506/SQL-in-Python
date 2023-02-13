@@ -1,0 +1,32 @@
+
+# After install the psycopg2 module using pip install in terminal,
+# importing module in the script. Here is named as pg2
+
+import psycopg2 as pg2
+
+# this is a password saved as variable
+secret = 'my_password'
+
+# Connect with a database:
+
+conn = pg2.connect(database='dvdrental', user='postgres', password=secret)
+
+# Open cursor to perform operations:
+cur = conn.cursor()
+
+# Execute operation
+cur.execute('SELECT * FROM payment')
+
+# Call a data you want, i.e. fetchone call only first row of data from the table.
+# There might be also fetchmany(n), fetchall()
+print(cur.fetchone())
+
+# You can storage data as a variable
+data = cur.fetchmany(5)
+
+print('all data: ', data)
+
+# you can call a specific row and specific column making slicing
+print('first row, second column: ', data[0][1])
+
+# During the lesson I support with https://www.psycopg.org/docs/install.html#prerequisites
